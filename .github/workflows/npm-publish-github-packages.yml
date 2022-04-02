@@ -4,8 +4,9 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: '5 * * * *'
 
 jobs:
   build:
@@ -17,6 +18,7 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm test
+      - run: npm start
 
   publish-gpr:
     needs: build
